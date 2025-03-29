@@ -1,25 +1,13 @@
 # .github/workflows/backend.yml
 name: Backend CI
 
-#on:
-#  push:
-#    paths:
-#      - 'backend/**'
-#  pull_request:
-#    paths:
-#      - 'backend/**'
-
-#jobs:
-#  call-backend-workflow:
-#    uses: imreg/taskmanager/backend/.github/workflows/laravel-tests.yml@main
-
 on:
   push:
-    branches:
-      - main
+    paths:
+      - 'backend/**'
   pull_request:
-    branches:
-      - main
+    paths:
+      - 'backend/**'
 
 jobs:
   call-workflow-passing-data:

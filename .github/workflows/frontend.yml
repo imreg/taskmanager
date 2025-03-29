@@ -1,5 +1,5 @@
 # .github/workflows/frontend.yml
-name: Next.js Frontend CI
+name: Frontend CI
 
 on:
   push:

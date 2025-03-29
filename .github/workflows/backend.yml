@@ -11,5 +11,5 @@ on:
 
 jobs:
   call-backend-workflow:
-    uses: ./backend/.github/workflows/laravel-tests.yml
+    uses: imreg/taskmanager/backend/.github/workflows/laravel-tests.yml
 

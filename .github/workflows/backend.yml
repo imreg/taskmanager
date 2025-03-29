@@ -1,15 +1,28 @@
 # .github/workflows/backend.yml
 name: Backend CI
 
+#on:
+#  push:
+#    paths:
+#      - 'backend/**'
+#  pull_request:
+#    paths:
+#      - 'backend/**'
+
+#jobs:
+#  call-backend-workflow:
+#    uses: imreg/taskmanager/backend/.github/workflows/laravel-tests.yml@main
+
 on:
   push:
-    paths:
-      - 'backend/**'
+    branches:
+      - main
   pull_request:
-    paths:
-      - 'backend/**'
+    branches:
+      - main
 
 jobs:
-  call-backend-workflow:
-    uses: imreg/taskmanager/backend/.github/workflows/laravel-tests.yml@main
-    
+  laravel-tests:
+    name: Laravel Tests
+    uses: imreg/taskmanager/backend/.github/workflows/laravel-tests.yml@main # Reusable workflow call
+    secrets: inherit # Inherit secrets from the caller workflow if needed.

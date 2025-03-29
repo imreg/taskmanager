@@ -22,7 +22,6 @@ on:
       - main
 
 jobs:
-  laravel-tests:
-    name: Laravel Tests
-    uses: ./backend/.github/workflows/laravel-tests.yml@main # Reusable workflow call
+  call-workflow-passing-data:
+    uses: imreg/taskmanager/backend/.github/workflows/laravel-tests.yml@main # Reusable workflow call
     secrets: inherit # Inherit secrets from the caller workflow if needed.

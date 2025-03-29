@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import API from '../utils/api';
 import { Task } from '../types/Task';
 import TaskForm from './TaskForm';
+import WeeklyView from './WeeklyView';
 
 export default function TaskBoard(): JSX.Element {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -40,6 +41,9 @@ export default function TaskBoard(): JSX.Element {
           <TaskForm task={editingTask} onSuccess={() => { setEditingTask(null); fetchTasks(); }} />
         </div>
       )}
+
+      <WeeklyView tasks={tasks} />
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
         {tasks.map(task => (
           <div key={task.id} className="border p-4 rounded bg-white shadow">

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
 import API from '../utils/api';
 import { Task } from '../types/Task';
 
@@ -6,7 +6,9 @@ interface Props {
   onSuccess: () => void;
 }
 
-export default function TaskForm({ onSuccess }: Props) {
+type InputChangeEvent = ChangeEvent<HTMLInputElement | HTMLSelectElement>;
+
+export default function TaskForm({ onSuccess }: Props): JSX.Element {
   const [form, setForm] = useState<Partial<Task>>({
     megnevezes: '',
     prioritas: 'normal',
@@ -16,15 +18,17 @@ export default function TaskForm({ onSuccess }: Props) {
     utemezett_nap: new Date().toISOString().split('T')[0],
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value, type, checked } = e.target;
+  const handleChange = (e: InputChangeEvent): void => {
+    const target = e.target as HTMLInputElement | HTMLSelectElement;
+    const { name, value, type } = target;
+    const checked = (target as HTMLInputElement).checked;
     setForm(prev => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : value,
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     const payload = {
       ...form,
@@ -42,7 +46,7 @@ export default function TaskForm({ onSuccess }: Props) {
     <form onSubmit={handleSubmit} className="space-y-2 p-4 bg-white rounded shadow">
       <input name="megnevezes" placeholder="Megnevezés" className="w-full border p-2" onChange={handleChange} />
       <input name="megbizottak" placeholder="Megbízottak (vesszővel)" className="w-full border p-2" onChange={handleChange} />
-      <input name="hossz" type="number" min="0" className="w-full border p-2" value={form.hossz} onChange={handleChange} />
+      <input name="hossz" type="number" min="0" className="w-full border p-2" value={form.hossz ?? 0} onChange={handleChange} />
       <input name="utemezett_nap" type="date" className="w-full border p-2" value={form.utemezett_nap} onChange={handleChange} />
       <select name="prioritas" className="w-full border p-2" onChange={handleChange}>
         <option value="alacsony">Alacsony</option>

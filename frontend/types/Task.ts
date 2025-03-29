@@ -7,4 +7,3 @@ export interface Task {
   megbizottak: string[];
   utemezett_nap: string;
 }
-

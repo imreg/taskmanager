@@ -2,22 +2,22 @@ import { useEffect, useState } from 'react';
 import API from '../utils/api';
 import { Task } from '../types/Task';
 
-export default function TaskBoard() {
+export default function TaskBoard(): JSX.Element {
   const [tasks, setTasks] = useState<Task[]>([]);
 
-  const fetchTasks = async () => {
-    const res = await API.get('/tasks');
+  const fetchTasks = async (): Promise<void> => {
+    const res = await API.get<Task[]>('/tasks');
     setTasks(res.data);
   };
 
-  const deleteTask = async (id: number) => {
+  const deleteTask = async (id: number): Promise<void> => {
     if (confirm('Biztosan törlöd?')) {
       await API.delete(`/tasks/${id}`);
       fetchTasks();
     }
   };
 
-  const duplicateTask = async (id: number) => {
+  const duplicateTask = async (id: number): Promise<void> => {
     await API.post(`/tasks/${id}/duplicate`);
     fetchTasks();
   };
@@ -44,4 +44,3 @@ export default function TaskBoard() {
     </div>
   );
 }
-

@@ -1,9 +1,9 @@
-import Head from 'next/head'
-import TaskForm from '../components/TaskForm'
-import TaskBoard from '../components/TaskBoard'
-import { useState } from 'react'
+import Head from 'next/head';
+import TaskForm from '../components/TaskForm';
+import TaskBoard from '../components/TaskBoard';
+import { useState } from 'react';
 
-export default function Home() {
+export default function Home(): JSX.Element {
   const [refresh, setRefresh] = useState(false);
   return (
     <>
@@ -18,5 +18,3 @@ export default function Home() {
     </>
   );
 }
-
-
